@@ -21,5 +21,5 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET)
-
+	
 rebuild: clean all

@@ -1,34 +1,28 @@
 #ifndef TMATRIX_H
 #define TMATRIX_H
 
-#include <stdexcept>
 #include "../TVector/TVector.h"
-#include <iostream>
 
-template <class T>
+template<typename T>
 class TMatrix {
 private:
-    TVector<T>* matrix;
-    int rows;
-    int cols;
+    TVector<T>* rows;
+    int rowCount;
 
 public:
-    TMatrix(int r = 1, int c = 1);
+    TMatrix(int rows = 1, int cols = 1);
     TMatrix(const TMatrix& other);
-
     ~TMatrix();
 
     TMatrix& operator=(const TMatrix& other);
-
     TMatrix& operator+=(const TMatrix& other);
-
     TVector<T>& operator[](int index);
 
-    template <class U>
-    friend std::istream& operator>>(std::istream& is, TMatrix<U>& mat);
+    template<typename U>
+    friend std::ostream& operator<<(std::ostream& out, const TMatrix<U>& matrix);
 
-    template <class U>
-    friend std::ostream& operator<<(std::ostream& os, const TMatrix<U>& mat);
+    template<typename U>
+    friend std::istream& operator>>(std::istream& in, TMatrix<U>& matrix);
 };
 
 #include "TMatrix.tpp"

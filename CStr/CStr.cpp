@@ -1,4 +1,5 @@
-#include "CStr.h"
+
+#include <iostream>
 #include <cstring>
 #include <cstdlib>
 #include <ctime>

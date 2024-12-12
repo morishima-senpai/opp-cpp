@@ -1,8 +1,7 @@
 #include <iostream>
 #include "TVector/TVector.h"
 #include "TMatrix/TMatrix.h"
-#include "CStr/CStr.h"
-
+#include "CStr/CStr.cpp"
 
 using namespace std;
 
@@ -109,3 +108,4 @@ int main() {
 
     return 0;
 }
+

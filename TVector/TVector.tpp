@@ -1,109 +1,68 @@
-#include "TVector.h"
 
-/*
-   .--.
-  |o_o |
-  |:_/ |
- //   \ \
-(|     | )
-/'\_   _/`\
-\___)=(___/
-
-*/
-
-template <class T>
-TVector<T>::TVector(int dim) {
-    length = (dim > 0) ? dim : 1;
-    arr = new T[length];
-
-    for (int i = 0; i < length; ++i) {
-        arr[i] = T();
-    }
+// TVector.tpp
+template<typename T>
+TVector<T>::TVector(int dimension) : length(dimension) {
+    data = new T[dimension];
 }
 
-template <class T>
-TVector<T>::TVector(const TVector& other) {
-    length = other.length;
-    arr = new T[length];
-
-    for (int i = 0; i < length; ++i) {
-        arr[i] = other.arr[i];
-    }
+template<typename T>
+TVector<T>::TVector(const TVector& other) : length(other.length) {
+    data = new T[length];
+    for (int i = 0; i < length; ++i)
+        data[i] = other.data[i];
 }
 
-template <class T>
+template<typename T>
 TVector<T>::~TVector() {
-    delete[] arr;
+    delete[] data;
 }
 
-template <class T>
-void TVector<T>::setLength(int new_length) {
-    if (new_length <= 0) return;
-
-    T* new_arr = new T[new_length];
-
-    int copy_length = (new_length < length) ? new_length : length;
-    for (int i = 0; i < copy_length; ++i) {
-        new_arr[i] = arr[i];
-    }
-
-    for (int i = copy_length; i < new_length; ++i) {
-        new_arr[i] = T();
-    }
-
-    delete[] arr;
-    arr = new_arr;
-    length = new_length;
+template<typename T>
+void TVector<T>::setLength(int newLength) {
+    T* newData = new T[newLength];
+    for (int i = 0; i < (newLength < length ? newLength : length); ++i)
+        newData[i] = data[i];
+    delete[] data;
+    data = newData;
+    length = newLength;
 }
 
-template <class T>
+template<typename T>
 TVector<T>& TVector<T>::operator=(const TVector& other) {
     if (this != &other) {
-        delete[] arr;
+        delete[] data;
         length = other.length;
-        arr = new T[length];
-
-        for (int i = 0; i < length; ++i) {
-            arr[i] = other.arr[i];
-        }
+        data = new T[length];
+        for (int i = 0; i < length; ++i)
+            data[i] = other.data[i];
     }
     return *this;
 }
 
-template <class T>
+template<typename T>
 TVector<T>& TVector<T>::operator+=(const TVector& other) {
-    if (length != other.length) {
-        throw std::runtime_error("Vectors must have the same dimension");
-    }
-
-    for (int i = 0; i < length; ++i) {
-        arr[i] += other.arr[i];
-    }
+    for (int i = 0; i < length; ++i)
+        data[i] += other.data[i];
     return *this;
 }
 
-template <class T>
+template<typename T>
 T& TVector<T>::operator[](int index) {
-    if (index < 0 || index >= length) {
-        throw std::out_of_range("Index out of range");
-    }
-    return arr[index];
+    return data[index];
 }
 
-template <class T>
-std::ostream& operator<<(std::ostream& os, const TVector<T>& vec) {
-    os << "[ ";
-    for (int i = 0; i < vec.length; ++i) {
-        os << vec.arr[i] << " ";
-    }
-    os << "]";
-    return os;
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const TVector<T>& vector) {
+    for (int i = 0; i < vector.length; ++i)
+        out << vector.data[i] << " ";
+    return out;
 }
 
-template <class T>
-std::istream& operator>>(std::istream& is, TVector<T>& vec) {
-    for (int i = 0; i < vec.length; ++i) {
-        is >> vec.arr[i];
-    }
-    return is;
+template<typename T>
+std::istream& operator>>(std::istream& in, TVector<T>& vector) {
+    for (int i = 0; i < vector.length; ++i)
+        in >> vector.data[i];
+    return in;
 }
+
+

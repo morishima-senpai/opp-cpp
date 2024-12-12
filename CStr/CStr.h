@@ -17,6 +17,7 @@ public:
 
     CStr& operator=(CStr& obj);
     CStr& operator=(const char* str);
+    CStr& operator=(const CStr& obj);
 
 
     CStr operator+(CStr& obj);

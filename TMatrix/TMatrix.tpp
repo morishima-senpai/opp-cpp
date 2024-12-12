@@ -1,87 +1,58 @@
-#include "TMatrix.h"
-
-
-
-template <class T>
-TMatrix<T>::TMatrix(int r, int c) {
-    rows = (r > 0) ? r : 1;
-    cols = (c > 0) ? c : 1;
-    matrix = new TVector<T>[rows];
-    for (int i = 0; i < rows; ++i) {
-        matrix[i] = TVector<T>(cols);
-    }
+// TMatrix.tpp
+template<typename T>
+TMatrix<T>::TMatrix(int rows, int cols) : rowCount(rows) {
+    this->rows = new TVector<T>[rows];
+    for (int i = 0; i < rows; ++i)
+        this->rows[i].setLength(cols);
 }
 
-// copy
-template <class T>
-TMatrix<T>::TMatrix(const TMatrix& other) {
-    rows = other.rows;
-    cols = other.cols;
-    matrix = new TVector<T>[rows];
-    for (int i = 0; i < rows; ++i) {
-        matrix[i] = other.matrix[i];
-    }
+template<typename T>
+TMatrix<T>::TMatrix(const TMatrix& other) : rowCount(other.rowCount) {
+    rows = new TVector<T>[rowCount];
+    for (int i = 0; i < rowCount; ++i)
+        rows[i] = other.rows[i];
 }
 
-template <class T>
+template<typename T>
 TMatrix<T>::~TMatrix() {
-    delete[] matrix;
+    delete[] rows;
 }
 
-template <class T>
+template<typename T>
 TMatrix<T>& TMatrix<T>::operator=(const TMatrix& other) {
     if (this != &other) {
-        delete[] matrix;
-        rows = other.rows;
-        cols = other.cols;
-        matrix = new TVector<T>[rows];
-        for (int i = 0; i < rows; ++i) {
-            matrix[i] = other.matrix[i];
-        }
+        delete[] rows;
+        rowCount = other.rowCount;
+        rows = new TVector<T>[rowCount];
+        for (int i = 0; i < rowCount; ++i)
+            rows[i] = other.rows[i];
     }
     return *this;
 }
 
-/*
-     /\_/\  
-    ( o.o ) 
-     > ^ <
-   (      )
-    >    <
-     -  -
-*/
-
-template <class T>
+template<typename T>
 TMatrix<T>& TMatrix<T>::operator+=(const TMatrix& other) {
-    if (rows != other.rows || cols != other.cols) {
-        throw std::runtime_error("Matrices must have the same dimensions");
-    }
-    for (int i = 0; i < rows; ++i) {
-        matrix[i] += other.matrix[i];
-    }
+    for (int i = 0; i < rowCount; ++i)
+        rows[i] += other.rows[i];
     return *this;
 }
 
-template <class T>
+template<typename T>
 TVector<T>& TMatrix<T>::operator[](int index) {
-    if (index < 0 || index >= rows) {
-        throw std::out_of_range("Row index out of range");
-    }
-    return matrix[index];
+    return rows[index];
 }
 
-template <class T>
-std::istream& operator>>(std::istream& is, TMatrix<T>& mat) {
-    for (int i = 0; i < mat.rows; ++i) {
-        is >> mat.matrix[i];
-    }
-    return is;
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const TMatrix<T>& matrix) {
+    for (int i = 0; i < matrix.rowCount; ++i)
+        out << matrix.rows[i] << "\n";
+    return out;
 }
 
-template <class T>
-std::ostream& operator<<(std::ostream& os, const TMatrix<T>& mat) {
-    for (int i = 0; i < mat.rows; ++i) {
-        os << mat.matrix[i] << std::endl;
-    }
-    return os;
+template<typename T>
+std::istream& operator>>(std::istream& in, TMatrix<T>& matrix) {
+    for (int i = 0; i < matrix.rowCount; ++i)
+        in >> matrix.rows[i];
+    return in;
 }
+
