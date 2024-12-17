@@ -1,7 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
-# Directories
 SRC_DIR = .
 BUILD_DIR = build
 

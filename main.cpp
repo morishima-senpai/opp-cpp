@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    srand(time(0));
+    // srand(time(0));
 
     cout << "TVector<double> Demonstration :" << endl;
 
@@ -45,7 +45,8 @@ int main() {
     
     cout << "Initial string_vec: " << string_vec << endl;
 
-    TVector<string> string_vec_2 = string_vec;
+    TVector<string> string_vec_2;
+    string_vec_2 = string_vec;
     string_vec_2[2] = "C++";
     cout << "Modified string_vec_2: " << string_vec_2 << endl;
 
