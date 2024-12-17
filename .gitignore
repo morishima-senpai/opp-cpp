@@ -1,3 +1,6 @@
 question.md
 build/
 .vscode/
+*.o
+*.txt
+program
