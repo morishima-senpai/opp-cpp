@@ -6,8 +6,10 @@
 using namespace std;
 
 int main() {
-    // srand(time(0));
+    // srand(time(NULL));
 
+
+    /*
     cout << "TVector<double> Demonstration :" << endl;
 
 
@@ -55,23 +57,24 @@ int main() {
 
     cout << endl << "--------------------------------------------------------------" << endl << endl;
 
+    */
 
 
-    cout << "TMatrix<int> Demonstration :" << endl;
+    cout << "TMatrix<int> Demonstration :\n" << endl;
 
-    TMatrix<int> integer_matrix(2, 3);
-    integer_matrix[0][0] = 1;
-    integer_matrix[0][1] = 2;
-    integer_matrix[0][2] = 3;
-    integer_matrix[1][0] = 4;
-    integer_matrix[1][1] = 5;
-    integer_matrix[1][2] = 6;
-    cout << "Initial integer_matrix :" << endl << integer_matrix << endl;
+    TMatrix<int> integer_matrix_1(2, 3);
+    integer_matrix_1[0][0] = 1;
+    integer_matrix_1[0][1] = 2;
+    integer_matrix_1[0][2] = 3;
+    integer_matrix_1[1][0] = 4;
+    integer_matrix_1[1][1] = 5;
+    integer_matrix_1[1][2] = 6;
+    cout << "Initial integer_matrix_1 :" << endl << integer_matrix_1 << endl;
 
 
-    TMatrix<int> integer_matrix_2 = integer_matrix;
+    TMatrix<int> integer_matrix_2 = integer_matrix_1;
     integer_matrix_2[1][2] = 10;
-    cout << "Modified integer_matrix_2 :" << endl << integer_matrix_2 << endl;
+    cout << "Modified (integer_matrix_1[1][2]=10) integer_matrix_2 :" << endl << integer_matrix_2 << endl;
 
     // += operator
     TMatrix<int> integer_matrix_3(2, 3);
@@ -81,9 +84,11 @@ int main() {
     integer_matrix_3[1][0] = 123;
     integer_matrix_3[1][1] = 81;
     integer_matrix_3[1][2] = 160;
-    
-    integer_matrix += integer_matrix_3;
-    cout << "After += operation integer_matrix :" << endl << integer_matrix << endl;
+
+    cout << "Matrix integer_matrix_3 :" << endl << integer_matrix_3 << endl;
+
+    integer_matrix_1 += integer_matrix_3;
+    cout << "After += operation integer_matrix_1 +=  integer_matrix_3 :" << endl << integer_matrix_1 << endl;
 
     // with CStr
     cout << endl << "TMatrix<CStr> Demonstration :" << endl;
@@ -95,7 +100,7 @@ int main() {
 
     // index & modification of CStr elements
     cout << endl << "Modifying CStr Matrix elements :" << endl;
-    cstr_matrix[0][0] = "Pink Floyd";
+    cstr_matrix[0][0] = "PinkFloyd";
     cstr_matrix[0][1] = "Slipknot";
     cstr_matrix[1][0] = "Metallica";
     cstr_matrix[1][1] = "Scorpions";

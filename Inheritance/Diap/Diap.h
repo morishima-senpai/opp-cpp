@@ -15,7 +15,7 @@ public:
              max_value(std::numeric_limits<int>::min()),
              count(0) {}
     
-    void Calc(SBase* source) override;
+    // void Calc(SBase* source) override;
     
     friend std::ostream& operator<<(std::ostream& os, const Diap& diap);
 };
