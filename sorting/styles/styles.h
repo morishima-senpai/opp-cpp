@@ -52,35 +52,15 @@ namespace Style {
         const std::string TOP     = "╔════════════════════════════════════════════════════╗";
         const std::string BOTTOM  = "╚════════════════════════════════════════════════════╝";
         const std::string LINE    = "║";
-        const std::string LIGHT_TOP    = "┌────────────────────────────────────────────────────┐";
-        const std::string LIGHT_BOTTOM = "└────────────────────────────────────────────────────┘";
-        const std::string LIGHT_LINE   = "│";
         const std::string SEPARATOR_DOUBLE = "═══════════════════════════════════════════════════════";
         const std::string SEPARATOR_SINGLE = "───────────────────────────────────────────────────────";
-        const std::string SEPARATOR_FANCY  = "•❈•════════════════════════════════════════════════════════════════════•❈•";
+        const std::string SEPARATOR_FANCY  = "•❈•══════════════════════════════════════════════════•❈•";
     }
 
     namespace Art {
-        const std::string WELCOME = R"(
-            ╔══════════════════════════════════════════════════════════════╗
-            ║  ████████                                                    ║
-            ║   ██   ██                                   ███              ║
-            ║   ██   ██  █████   █████    █████  █████      ██  ██   ██    ║
-            ║   ██   ██ ██   ██ ██       ██  ██ ██   ██   ████  ██   ██    ║
-            ║   ██   ██ ██   ██ ██       ██  ██ ██████   ██  ██ ███████    ║
-            ║   ██   ██ ██   ██ ██       ██  ██ ██      ██   ██ ██   ██    ║
-            ║   ██   ██  █████   █████  ██   ██  █████   █████  ██   ██    ║
-            ║                                                              ║
-            ║            █████   █████        █████  ████    █████         ║
-            ║           ██  ██  ██  ██       ██  ██     ██  ██             ║
-            ║            █████   █████       ██  ██  █████  ██████         ║
-            ║           ██  ██  ██  ██       ██  ██ ██  ██  ██   ██        ║
-            ║          ██   ██ ██   ██      ██   ██  ████   ██████         ║
-            ╚══════════════════════════════════════════════════════════════╝)";
-
         const std::string COMPLETION = R"(
             ★・・・・・・★・・・・・・★・・・・・・★・・・・・・★
-            ・        🎉 Program Completed Successfully! 🎉     ・  
+            ・        🎉 Program Completed Successfully! 🎉     ・
             ★・・・・・・★・・・・・・★・・・・・・★・・・・・・★)";
 
         const std::string FILE_SECTION = "📂";
@@ -96,15 +76,15 @@ namespace Style {
 
         std::cout << BRIGHT_CYAN << TOP << RESET << "\n";
         if (!icon.empty()) {
-            std::cout << BRIGHT_CYAN << LINE << RESET 
-                << BOLD << BRIGHT_YELLOW << std::setw(20) << icon << "  " << title 
-                << std::setw(18) << "" << RESET 
+            std::cout << BRIGHT_CYAN << LINE << RESET
+                << BOLD << BRIGHT_YELLOW << std::setw(20) << icon << "  " << BLINK << title
+                << std::setw(18) << "" << RESET
                 << BRIGHT_CYAN << LINE << RESET << "\n"
                 << BRIGHT_CYAN << BOTTOM << RESET << "\n";
         }else{
-            std::cout << BRIGHT_CYAN << LINE << RESET 
-                << BOLD << BRIGHT_YELLOW << std::setw(20) << "   " << title 
-                << std::setw(18) << "" << RESET 
+            std::cout << BRIGHT_CYAN << LINE << RESET
+                << BOLD << BRIGHT_YELLOW << std::setw(20) << "   " << BLINK << title
+                << std::setw(18) << "" << RESET
                 << BRIGHT_CYAN << LINE << RESET << "\n"
                 << BRIGHT_CYAN << BOTTOM << RESET << "\n";
         }
@@ -112,28 +92,28 @@ namespace Style {
     }
 
     inline void printPrompt(const std::string& message) {
-        std::cout << Color::BRIGHT_RED << Format::BOLD 
-                 << "➤ " << message << Color::RESET << "\n";
+        std::cout << Color::BRIGHT_RED << Format::BOLD
+                 << "➤ " << message << Color::RESET;
     }
 
     inline void printHint(const std::string& hint) {
-        std::cout << Color::BRIGHT_YELLOW << Format::ITALIC 
-                 << "💡 " << hint << Color::RESET << "\n";
+        std::cout << Color::BRIGHT_YELLOW << Format::ITALIC
+                 << "💡 " << hint << Color::RESET;
     }
 
     inline void printResult(const std::string& result) {
-        std::cout << Color::BRIGHT_BLUE << Format::BOLD 
+        std::cout << Color::BRIGHT_BLUE << Format::BOLD
                  << result << Color::RESET;
     }
 
     inline void printError(const std::string& error) {
-        std::cout << Color::BRIGHT_RED << Format::BOLD 
+        std::cout << Color::BRIGHT_RED << Format::BOLD
                  << "❌ " << error << Color::RESET << "\n";
     }
 
     inline void printSuccess(const std::string& message) {
-        std::cout << Color::BRIGHT_GREEN << Format::BOLD 
-                 << "✓ " << message << Color::RESET << "\n";
+        std::cout << Color::BRIGHT_GREEN << Format::BOLD
+                 << "✓ " << message << Color::RESET ;
     }
 
     inline void printSeparator(const std::string& style = "double") {

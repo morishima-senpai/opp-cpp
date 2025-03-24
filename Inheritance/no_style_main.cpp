@@ -20,12 +20,6 @@ std::string captureOutput(const T& processor) {
 }
 
 int main() {
-    // std::cout << Style::Color::BRIGHT_MAGENTA 
-    //     << Style::Format::BOLD 
-    //     << Style::Art::WELCOME 
-    //     << Style::Color::RESET << "\n\n";
-
-
 
     createSampleFile("numbers.txt");
 
@@ -40,22 +34,23 @@ int main() {
 
 
     // file input
-    Style::printHeader("Файловый ввод ", Style::Art::FILE_SECTION);
-    Style::printPrompt(" Обработка частот:");
+    Style::printHeader("Файловый ввод ");
+    Style::printPrompt("Обработка частот:");
     freqProcessor.Calc(&fileSupplier);
     Style::printResult(captureOutput(freqProcessor));
 
     // new file
     SFile fileSupplier2("numbers.txt");
-    Style::printPrompt(" Обработка диапазона:");
+    Style::printPrompt("\nОбработка диапазона:");
     diapProcessor.Calc(&fileSupplier2);
     Style::printResult(captureOutput(diapProcessor));
 
 
 
+
     // keyboard input
-    Style::printHeader("Клавиатурный ввод", Style::Art::KEYBOARD_SECTION);
-    Style::printPrompt(" Введите числа для анализа частот:");
+    Style::printHeader("Клавиатурный ввод");
+    Style::printPrompt("Введите числа для анализа частот:");
     Style::printHint("Введите -1 для завершения ввода");
 
 
@@ -63,7 +58,7 @@ int main() {
     freqProcessor.Calc(&kbrdSupplier);
     Style::printResult(captureOutput(freqProcessor));
 
-    Style::printPrompt(" Введите числа для анализа диапазона:");
+    Style::printPrompt("\nВведите числа для анализа диапазона:");
     Style::printHint("Введите -1 для завершения ввода");
     diapProcessor.Calc(&kbrdSupplier);
     Style::printResult(captureOutput(diapProcessor));
@@ -71,7 +66,7 @@ int main() {
 
 
     // with queue input
-    Style::printHeader("Очередь ввод  ", Style::Art::QUEUE_SECTION);
+    Style::printHeader("Очередь ввод :");
     Style::printPrompt("Обработка частот:");
     
     freqProcessor.Calc(&queueSupplier);
@@ -79,19 +74,10 @@ int main() {
 
     // new queue
     SQueue queueSupplier2(5);
-    Style::printPrompt(" Обработка диапазона:");
+    Style::printPrompt("\nОбработка диапазона:");
     diapProcessor.Calc(&queueSupplier2);
     Style::printResult(captureOutput(diapProcessor));
 
-
-
-
-
-    Style::printSeparator("fancy");
-    std::cout << Style::Color::BRIGHT_MAGENTA 
-              << Style::Format::BOLD 
-              << Style::Art::COMPLETION 
-              << Style::Color::RESET << "\n";
 
     return 0;
 }
